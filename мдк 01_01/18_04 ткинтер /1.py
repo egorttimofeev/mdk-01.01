@@ -15,52 +15,41 @@
 # b1.pack()
 # root.mainloop()
 
-
 import tkinter as tk
-from tkinter import messagebox
 
+# Словарь с соответствием названия цвета и его кода в шестнадцатеричной системе
+colors = {
+    "Красный": "#ff0000",
+    "Оранжевый": "#ff7d00",
+    "Желтый": "#ffff00",
+    "Зеленый": "#00ff00",
+    "Голубой": "#007dff",
+    "Синий": "#0000ff",
+    "Фиолетовый": "#7d00ff"
+}
 
-def insert_color_code(event):
-    color_button = event.widget
-    color_name = color_button.cget("text")
-    color_code = color_button.cget("bg")
+def insert_color_code(color):
+    color_code = colors[color]
+    color_entry.delete(0, tk.END)
+    color_entry.insert(tk.END, color_code)
+    color_label.config(text=color)
 
-    entry.insert(tk.END, f"{color_code}\n")
-    label.config(text=f"{color_name}")
-
-
+# Создание графического интерфейса
 root = tk.Tk()
-root.title("Радужные кнопки")
+root.title("Цвета радуги")
 
-# Создаем семь кнопок с цветами радуги
-red_button = tk.Button(root, text="Красный", bg="#ff0000", command=lambda: insert_color_code(None))
-red_button.pack()
+# Создание метки для отображения названия цвета
+color_label = tk.Label(root, text="", font=("Helvetica", 12, "bold"), pady=10)
+color_label.pack()
 
-orange_button = tk.Button(root, text="Оранжевый", bg="#ff7d00", command=lambda: insert_color_code(None))
-orange_button.pack()
+# Создание текстового поля для отображения кода цвета
+color_entry = tk.Entry(root, font=("Helvetica", 12), width=10, state="readonly")
+color_entry.pack()
 
-yellow_button = tk.Button(root, text="Желтый", bg="#ffff00", command=lambda: insert_color_code(None))
-yellow_button.pack()
+# Создание кнопок для каждого цвета
+for color in colors:
+    button = tk.Button(root, text=color, bg=colors[color], padx=10, pady=5, font=("Helvetica", 10),
+                       command=lambda c=color: insert_color_code(c))
+    button.pack(side=tk.LEFT, padx=5, pady=5)
 
-green_button = tk.Button(root, text="Зеленый", bg="#00ff00", command=lambda: insert_color_code(None))
-green_button.pack()
-
-blue_button = tk.Button(root, text="Голубой", bg="#007dff", command=lambda: insert_color_code(None))
-blue_button.pack()
-
-indigo_button = tk.Button(root, text="Синий", bg="#0000ff", command=lambda: insert_color_code(None))
-indigo_button.pack()
-
-violet_button = tk.Button(root, text="Фиолетовый", bg="#7d00ff", command=lambda: insert_color_code(None))
-violet_button.pack()
-
-# Создаем текстовое поле для отображения кодов цветов
-entry = tk.Text(root, height=10, width=40)
-entry.pack()
-
-# Создаем метку для отображения названий цветов
-label = tk.Label(root, text="", font=("Helvetica", 16))
-label.pack()
-
-# Запускаем главный цикл обработки событий
 root.mainloop()
