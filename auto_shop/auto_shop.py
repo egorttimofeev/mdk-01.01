@@ -8,7 +8,7 @@ con = sqlite3.connect("auto_shop.db")
 
 window = Tk()
 window.title("bibika.ru")
-window.geometry('1000x700')
+window.geometry('850x700')
 
 frame = Frame(
     window,
