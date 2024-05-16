@@ -6,7 +6,6 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 import auto_manager
 
-
 con = sqlite3.connect("auto_shop.db")
 
 window = Tk()
